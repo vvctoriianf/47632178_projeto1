@@ -1,0 +1,41 @@
+import subprocess 
+import math 
+from datetime import datetime, timedelta 
+
+def formata_valor(valor):  
+    return  f'R${valor:_.2f}'.replace('.',',').replace('_','.') 
+
+def montante(capital,taxa_juros,meses):
+        return capital * math.pow((1 + taxa_juros/100), meses)
+
+subprocess.run('cls', shell=True) 
+try: 
+    investimento = str(input('Tipo de investimento CDB ou LCI: ')) 
+    capital = float(input('Seu capital inicial: ')) 
+    taxa_juros = float(input('Taxa de juros mensal (%): ')) 
+    meses = int(input('Número de meses de aplicação: ')) 
+    print('\nPressione enter para calcular o montante...')
+    
+    data_atual = datetime.now() 
+    dias = meses * 30 
+    data_venc = data_atual + timedelta(days=dias) 
+    data_formatada = data_atual.strftime("%d/%m/%Y") 
+
+    data_venc_forma = data_venc.strftime("%d/%m/%Y") 
+
+except ValueError: 
+    print('Entrada Invalida! \nInsira valores numéricos para o capital, taxa de juros e meses.') 
+    print('\nPressione enter para sair...')
+
+else: 
+   
+    print(f'Tipo de investimento: {investimento}')
+    print(f'Capital Inicial: {formata_valor(capital)}') 
+    print(f'Taxa de juros: {taxa_juros}%') 
+    print(f'Período {meses} meses') 
+
+    print(f'Montante Final: {formata_valor(montante(capital,taxa_juros,))}') 
+    print(f'\nDatas') 
+    print(f'Aplicação: {data_formatada}')
+    print(f'Vencimento: {data_venc_forma}') 
+    print('\nPressione enter para sair...')
